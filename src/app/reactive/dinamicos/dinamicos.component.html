@@ -1,7 +1,7 @@
 <h2>Template: <small> Dinámicos </small></h2>
 <hr>
 
-<form (ngSubmit)="save()" [formGroup]="myForm" autocomplete="off">
+<form  [formGroup]="myForm" autocomplete="off">
 
     <!-- Nombre -->
     <div class="mb-3 row">
@@ -20,9 +20,15 @@
         <label class="col-sm-3 col-form-label">Agregar</label>
         <div class="col-sm-9">
             <div class="input-group">
-                <input class="form-control" placeholder="Agregar favorito">
+                <input class="form-control" 
+                       placeholder="Agregar favorito"
+                       [formControl]="nuevoFavorito"
+                       (keydown.enter)="add()">
 
-                <button class="btn btn-outline-primary" type="button">
+                <button class="btn btn-outline-primary" 
+                        type="button"
+                        (click)="add()"
+                        >
                     Agregar
                 </button>
             </div>
@@ -36,14 +42,18 @@
             <div class="input-group mb-1" *ngFor="let favorito of favoritos.controls; let i = index">
                 <input class="form-control" [formControlName]="i">
 
-                <button class="btn btn-outline-danger" type="button"> Eliminar </button>
+                <button class="btn btn-outline-danger" 
+                        type="button"
+                        (click)="delete(i)"> Eliminar </button>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <button type="button" class="btn btn-primary float-end">
+            <button type="button" 
+                    class="btn btn-primary float-end"
+                    (click)="save()">
                 Guardar
             </button>
         </div>
